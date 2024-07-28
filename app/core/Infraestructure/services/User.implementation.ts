@@ -7,7 +7,7 @@ const METHOD = {
 
 const endpoint = 'https://my-json-server.typicode.com/Rowleen/dapp/users'
 
-export default class TripImplementation implements UserInterface {
+export default class UserImplementation implements UserInterface {
   constructor() {}
 
   public get = async (): Promise<User[]> => {
