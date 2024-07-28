@@ -45,4 +45,10 @@ export default class FineImplementation implements FineInterface {
 
     return await response.json()
   }
+
+  public filterByStatus = async (status: FineStatus): Promise<Fine[]> => {
+    const response = await fetch(`${endpoint}?status=${status}`)
+
+    return await response.json()
+  }
 }
