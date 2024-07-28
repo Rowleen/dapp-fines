@@ -1,0 +1,21 @@
+@import '../../sass/variables'
+
+.header
+  width: 100%
+  display: flex
+  justify-content: space-between
+  padding: $spacing-xl
+  color: $bg-color-base
+  border-radius: $radius-md
+  background-color: $bg-color-dark
+
+  @include breakpoint(mobile)
+    border-radius: unset
+
+  .logoWrapper
+    width: $spacing-6xl
+    height: $spacing-6xl
+    padding: $spacing-xs
+    background-color: $bg-color-base
+    border-radius: $radius-rounded
+
