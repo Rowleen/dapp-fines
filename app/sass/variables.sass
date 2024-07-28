@@ -1,0 +1,50 @@
+// Backgrounds
+$bg-color-base: #FFF
+$bg-color-dark: #121212
+$bg-color-active: #F3F3F3
+$bg-color-disabled: #898989
+
+// Fonts
+$font-color-primary: #121212
+$font-color-secondary: #FFF
+$font-color-third: #444
+$font-color-danger: #C93957
+$font-color-disabled: #898989
+
+// Radius
+$radius-md: 16px
+$radius-rounded: 100px
+
+// Borders
+$border-size: 1px
+$border-color-primary: #D8D8D8
+$border-color-secondary: #B0B0B0
+
+// Spacings
+$spacing-xs: 4px
+$spacing-sm: 8px
+$spacing-md: 16px
+$spacing-lg: 24px
+$spacing-xl: 32px
+$spacing-2xl: 40px
+$spacing-3xl: 44px
+$spacing-4xl: 48px
+$spacing-5xl: 56px
+$spacing-6xl: 64px
+$spacing-7xl: 72px
+$spacing-9xl: 80px
+$spacing-10xl: 88px
+
+// breakpoints
+@mixin breakpoint($point)
+  @if $point == mobile
+    @media (max-width: 480px) 
+      @content
+
+  @if $point == laptop
+    @media (481px <= width <= 768px) 
+      @content
+
+  @if $point == desktop
+    @media (max-width: 1025px)
+      @content
