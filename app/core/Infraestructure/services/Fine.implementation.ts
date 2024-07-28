@@ -7,7 +7,7 @@ const METHOD = {
   PATCH: 'PATCH'
 }
 
-const endpoint = 'https://my-json-server.typicode.com/Rowleen/dapp/users'
+const endpoint = 'https://my-json-server.typicode.com/Rowleen/dapp/fines'
 
 export default class FineImplementation implements FineInterface {
   constructor() {}
