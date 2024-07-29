@@ -19,9 +19,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   const router = useRouter()
-  const authed = window.sessionStorage.getItem('authed')
 
   useEffect(() => {
+    const authed = window.sessionStorage.getItem('authed')
     if (!authed) {
       router.push('/login')
     }
