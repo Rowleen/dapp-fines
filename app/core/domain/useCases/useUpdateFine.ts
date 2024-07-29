@@ -27,12 +27,18 @@ const useUpdateStatusFine = () => {
     if (sender && recipent) {
       const newSender = {
         ...sender,
-        tokens: sender?.tokens + fine.ammountTokens
+        tokens:
+          fine.status === 'approved'
+            ? recipent?.tokens - fine.ammountTokens
+            : sender.tokens
       }
 
       const newRecipent = {
         ...recipent,
-        tokens: recipent?.tokens - fine.ammountTokens
+        tokens:
+          fine.status === 'approved'
+            ? recipent?.tokens + fine.ammountTokens
+            : recipent.tokens
       }
 
       const updateUserListWithSender = users.map(user =>
@@ -57,10 +63,12 @@ const useUpdateStatusFine = () => {
     },
     onSuccess: fine => {
       updateFineContext(fine)
-      toast.success('The fine was succefully updated')
+      toast.success('The fine was succefully updated.')
     },
     onError: () =>
-      toast.error('Ops, something went wrong updating. Please try again later.')
+      toast.error(
+        'Ops, something went wrong while updating. Please try again later.'
+      )
   })
 }
 

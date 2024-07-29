@@ -10,36 +10,12 @@ const useCreateFine = () => {
   const context = useAppContext()
 
   const addFineToContext = (fine: Fine) => {
-    const { fines, users, setData } = context
+    const { fines, setData } = context
 
-    const sender = users.find(user => user.id === fine.sender)
-    const recipent = users.find(user => user.id === fine.recipent)
-
-    if (sender && recipent) {
-      const newSender = {
-        ...sender,
-        tokens: sender?.tokens - fine.ammountTokens
-      }
-
-      const newRecipent = {
-        ...recipent,
-        tokens: recipent?.tokens + fine.ammountTokens
-      }
-
-      const updateUserListWithSender = users.map(user =>
-        user.id === newSender.id ? newSender : user
-      )
-
-      const updateUserList = updateUserListWithSender.map(user =>
-        user.id === newRecipent.id ? newRecipent : user
-      )
-
-      setData({
-        ...context,
-        users: [...updateUserList],
-        fines: [...fines, fine]
-      })
-    }
+    setData({
+      ...context,
+      fines: [...fines, fine]
+    })
   }
 
   return useMutation({
@@ -47,7 +23,7 @@ const useCreateFine = () => {
     onSuccess: fine => {
       addFineToContext(fine)
 
-      toast.success('The fine was succefully created')
+      toast.success('The fine was succefully created.')
     },
     onError: () =>
       toast.error('Ops, something went wrong. Please try again later.')
