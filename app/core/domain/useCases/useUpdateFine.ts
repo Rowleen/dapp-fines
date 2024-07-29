@@ -2,6 +2,7 @@ import { useMutation } from '@tanstack/react-query'
 import useAppContext from '../../../context/context'
 import FineImplementation from '../../Infraestructure/services/Fine.implementation'
 import type { Fine, FineStatus } from '../entities/Fine'
+import { toast } from 'react-toastify'
 
 const fineImpl = new FineImplementation()
 
@@ -26,7 +27,12 @@ const useUpdateStatusFine = () => {
     mutationFn: ({ fine, status }: mutationFnInterface) => {
       return fineImpl.patch(fine.id, status)
     },
-    onSuccess: fine => updateFineContext(fine)
+    onSuccess: fine => {
+      updateFineContext(fine)
+      toast.success('The fine was succefully updated')
+    },
+    onError: () =>
+      toast.error('Ops, something went wrong updating. Please try again later.')
   })
 }
 
