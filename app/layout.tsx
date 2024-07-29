@@ -2,10 +2,12 @@
 import Head from 'next/head'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AppContextProvider } from './context/context'
+import { ToastContainer } from 'react-toastify'
 import { Header } from './components'
 
 import './sass/globals.sass'
 import styles from './sass/layout.module.sass'
+import 'react-toastify/dist/ReactToastify.css'
 
 const queryClient = new QueryClient()
 
@@ -41,6 +43,7 @@ export default function RootLayout({
                 {children}
               </div>
             </div>
+            <ToastContainer />
           </body>
         </html>
       </AppContextProvider>
