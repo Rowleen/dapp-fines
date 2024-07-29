@@ -14,15 +14,43 @@ interface mutationFnInterface {
 const useUpdateStatusFine = () => {
   const context = useAppContext()
 
-  const updateFineContext = (updatedFine: Fine) => {
-    const { fines, setData } = context
+  const updateFineContext = (fine: Fine) => {
+    const { fines, users, setData } = context
 
     const updatedFinesArray = fines.map(oldFine =>
-      updatedFine.id === oldFine.id ? updatedFine : oldFine
+      fine.id === oldFine.id ? fine : oldFine
     )
 
-    setData({ ...context, fines: updatedFinesArray })
+    const sender = users.find(user => user.id === fine.sender)
+    const recipent = users.find(user => user.id === fine.recipent)
+
+    if (sender && recipent) {
+      const newSender = {
+        ...sender,
+        tokens: sender?.tokens + fine.ammountTokens
+      }
+
+      const newRecipent = {
+        ...recipent,
+        tokens: recipent?.tokens - fine.ammountTokens
+      }
+
+      const updateUserListWithSender = users.map(user =>
+        user.id === newSender.id ? newSender : user
+      )
+
+      const updateUserList = updateUserListWithSender.map(user =>
+        user.id === newRecipent.id ? newRecipent : user
+      )
+
+      setData({
+        ...context,
+        users: [...updateUserList],
+        fines: updatedFinesArray
+      })
+    }
   }
+
   return useMutation({
     mutationFn: ({ fine, status }: mutationFnInterface) => {
       return fineImpl.patch(fine.id, status)
