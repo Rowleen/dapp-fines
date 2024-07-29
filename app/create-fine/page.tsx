@@ -64,7 +64,11 @@ const CreateFine: FC = () => {
             Select a user
           </option>
           {data.users.map((user, index) => (
-            <option key={user.id + index} value={user.id}>
+            <option
+              key={user.id + index}
+              value={user.id}
+              disabled={user.tokens === 0}
+            >
               {user.nickname} - Total tokens: {user.tokens}
             </option>
           ))}
