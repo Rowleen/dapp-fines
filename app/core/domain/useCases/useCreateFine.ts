@@ -50,7 +50,7 @@ const useCreateFine = () => {
       toast.success('The fine was succefully created')
     },
     onError: () =>
-      toast.error('Ops, something went wrong. Please try again laters.')
+      toast.error('Ops, something went wrong. Please try again later.')
   })
 }
 
