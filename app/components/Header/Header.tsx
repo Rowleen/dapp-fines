@@ -5,7 +5,8 @@ import Link from 'next/link'
 import styles from './header.module.sass'
 
 const Header: FC = () => {
-  const authed = window.sessionStorage.getItem('authed')
+  const authed =
+    typeof window !== 'undefined' && window.sessionStorage.getItem('authed')
 
   return (
     <header className={styles.header}>

@@ -16,6 +16,7 @@ interface FineProps {
 
 const Fine: FC<FineProps> = ({ fine }) => {
   const data = useAppContext()
+  const userId = Number(window.sessionStorage.getItem('userId'))
 
   const { mutate } = useUpdateStatusFine()
 
@@ -24,13 +25,22 @@ const Fine: FC<FineProps> = ({ fine }) => {
   const recipent =
     data && data.users.find(user => Number(user.id) === fine.recipent)
 
+  const fineClass = classNames({
+    [styles.fine]: true,
+    [styles.disabled]: fine.initiatorId === userId && fine.status === 'pending'
+  })
+
   const status = classNames({
     [styles.statusSuccess]: fine.status === 'approved',
     [styles.statusDanger]: fine.status === 'rejected'
   })
 
   return (
-    <article className={styles.fine}>
+    <article className={fineClass}>
+      {fine.initiatorId === userId && (
+        <div className={styles.byYou}>Made by you</div>
+      )}
+
       <div className={styles.column}>
         <Avatar name={sender?.nickname || 'Doe'} />
       </div>

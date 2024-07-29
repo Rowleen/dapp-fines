@@ -18,6 +18,7 @@ type Inputs = {
 
 const CreateFine: FC = () => {
   const { mutate } = useCreateFine()
+  const userId = Number(window.sessionStorage.getItem('userId'))
 
   const data = useAppContext()
   const [sender, setSender] = useState<User>({
@@ -47,17 +48,21 @@ const CreateFine: FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting }
+    reset,
+    formState: { errors, isSubmitting, isSubmitSuccessful }
   } = useForm<Inputs>()
+
+  useEffect(() => {
+    reset()
+  }, [isSubmitSuccessful])
 
   const onSubmit: SubmitHandler<Inputs> = fine => {
     const completeData = {
+      initiatorId: userId,
       // Cast to number sender and recipent to update correctly the context.
       sender: Number(fine.sender),
       recipent: Number(fine.recipent),
       ammountTokens: Number(fine.ammountTokens),
-      // Fake this prop until login it's created.
-      initiatorId: 0,
       // Complete this prop. It would be the backend which orchestrate this things.
       id: data.fines[data.fines.length - 1].id + 1,
       status: 'pending' as FineStatus
@@ -83,7 +88,7 @@ const CreateFine: FC = () => {
             <option
               key={user.id + index}
               value={user.id}
-              disabled={user.tokens === 0}
+              disabled={user.tokens === 0 || user.id === userId}
             >
               {user.nickname} - Total tokens: {user.tokens}
             </option>
@@ -102,12 +107,15 @@ const CreateFine: FC = () => {
         <select
           className={styles.input}
           {...register('recipent', { required: true })}
+          defaultValue='Select a user'
         >
-          <option value='' disabled>
-            Select a user
-          </option>
+          <option disabled>Select a user</option>
           {recipents.map((user, index) => (
-            <option key={user.id + index} value={user.id}>
+            <option
+              key={user.id + index}
+              value={user.id}
+              disabled={user.id === userId}
+            >
               {user.nickname}
             </option>
           ))}

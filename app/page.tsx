@@ -2,7 +2,8 @@
 import { FinesList } from './components'
 
 const Home = () => {
-  const authed = window.sessionStorage.getItem('authed')
+  const authed =
+    typeof window !== 'undefined' && window.sessionStorage.getItem('authed')
 
   return authed && <FinesList />
 }

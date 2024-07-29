@@ -1,6 +1,7 @@
 @import '../../sass/variables'
 
 .fine
+  position: relative
   width: 100%
   display: grid
   grid-template-columns: repeat(4, 1fr)
@@ -8,6 +9,16 @@
   border-radius: $radius-md
   padding: $spacing-lg $spacing-md
   margin-bottom: $spacing-md
+
+  .byYou
+    position: absolute
+    top:-8px
+    left: -16px
+    color: $font-color-secondary
+    background-color: $bg-color-fourth
+    padding: $spacing-sm
+    font-size: .8rem
+    border-radius: $radius-md
 
   .column
     display: flex
@@ -37,3 +48,7 @@
     .tokenText
       margin-bottom: $spacing-xs
       color: $font-color-disabled
+
+.disabled
+  pointer-events: none
+  opacity: 0.7
