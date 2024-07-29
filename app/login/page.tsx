@@ -25,7 +25,7 @@ const Login: FC = () => {
     formState: { errors, isSubmitting }
   } = useForm<Inputs>()
 
-  const handleLogin = data => {
+  const handleLogin = (data: Inputs) => {
     const selectedUser = context.users.find(
       user => user.nickname === data.username
     )

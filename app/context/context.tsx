@@ -11,7 +11,7 @@ interface StateAppInterface {
 }
 
 interface ContextAppInterface extends StateAppInterface {
-  setData: () => void
+  setData: (data: StateAppInterface) => void
 }
 
 export const AppContext = createContext({
