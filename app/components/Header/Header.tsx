@@ -1,6 +1,5 @@
 'use client'
 import { FC } from 'react'
-import Image from 'next/image'
 
 import styles from './header.module.sass'
 
