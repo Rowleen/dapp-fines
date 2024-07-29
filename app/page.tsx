@@ -2,7 +2,9 @@
 import { FinesList } from './components'
 
 const Home = () => {
-  return <FinesList />
+  const authed = window.sessionStorage.getItem('authed')
+
+  return authed && <FinesList />
 }
 
 export default Home

@@ -1,5 +1,6 @@
 'use client'
 import Head from 'next/head'
+import { useRouter } from 'next/navigation'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AppContextProvider } from './context/context'
 import { ToastContainer } from 'react-toastify'
@@ -8,6 +9,7 @@ import { Header } from './components'
 import './sass/globals.sass'
 import styles from './sass/layout.module.sass'
 import 'react-toastify/dist/ReactToastify.css'
+import { useEffect } from 'react'
 
 const queryClient = new QueryClient()
 
@@ -16,6 +18,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const router = useRouter()
+  const authed = window.sessionStorage.getItem('authed')
+
+  useEffect(() => {
+    if (!authed) {
+      router.push('/login')
+    }
+  })
+
   return (
     <QueryClientProvider client={queryClient}>
       <AppContextProvider>
