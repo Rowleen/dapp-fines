@@ -7,7 +7,7 @@ import styles from './button.module.sass'
 interface ButtonProps {
   color?: 'primary' | 'danger'
   text: string
-  onClick?: (event: React.MouseEvent) => void
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
   shape: 'pill' | 'button' | 'link'
   value?: string
   type: 'button' | 'submit' | 'reset' | undefined
