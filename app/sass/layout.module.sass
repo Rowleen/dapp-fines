@@ -1,0 +1,44 @@
+@import '../sass/variables'
+
+.wrapper
+  width: 100vw
+  height: 100vh
+  display: flex
+  justify-content: center
+  overflow-y: scroll
+
+  .home
+    width: 100%
+    max-width: 1200px
+    display: flex
+    flex-direction: column
+    align-items: center
+    padding: $spacing-6xl $spacing-6xl $spacing-9xl
+
+    @include breakpoint(mobile)
+      padding: unset
+
+    .titleWrapper
+      width: 100%
+      max-width: 360px
+      color: $font-color-primary
+      padding-top: $spacing-7xl
+      margin-bottom: $spacing-3xl
+
+      @include breakpoint(mobile)
+        max-width: unset
+        padding: $spacing-7xl $spacing-4xl 0
+
+      .title, .subtitle
+        width: 100%
+        text-align: center
+
+      .title
+        font-size: 2rem
+        font-family: 'Roboto Black'
+        margin-bottom: $spacing-md
+
+      .subtitle
+        font-size: 1.25rem
+        font-family: 'Roboto Regular'
+        margin-bottom: $spacing-xl
