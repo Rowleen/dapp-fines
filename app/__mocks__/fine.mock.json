@@ -1,0 +1,28 @@
+{
+  "fines": [
+    {
+      "id": 1,
+      "initiatorId": 1,
+      "sender": 2,
+      "recipent": 3,
+      "ammountTokens": 2,
+      "status": "pending"
+    },
+    {
+      "id": 2,
+      "initiatorId": 1,
+      "sender": 3,
+      "recipent": 2,
+      "ammountTokens": 4,
+      "status": "approved"
+    },
+    {
+      "id": 3,
+      "initiatorId": 2,
+      "sender": 1,
+      "recipent": 3,
+      "ammountTokens": 9,
+      "status": "rejected"
+    }
+  ]
+}
