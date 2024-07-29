@@ -11,3 +11,21 @@
 
   @include breakpoint(mobile)
     border-radius: unset
+
+  .linksWrapper
+    display: grid
+    grid-template-columns: 1fr 1fr
+    column-gap: $spacing-lg
+    align-items: center
+
+    .link
+      padding: $spacing-md
+      color: $font-color-primary
+      border-radius: $radius-md
+      background-color: $bg-color-secondary
+      border: solid $border-size $border-color-secondary
+
+      &:hover
+        color: $font-color-secondary
+        background-color: $bg-color-third
+        transition: background-color 200ms linear

@@ -19,10 +19,12 @@
   color: $font-color-primary
   border: solid 1px $border-color-primary
   background-color: $bg-color-secondary
-  padding: $spacing-lg $spacing-2xl $spacing-lg $spacing-3xl
+  padding: $spacing-md $spacing-xl
 
   &:hover, &:active
+    color: $bg-color-secondary
     background-color: $bg-color-third
+    transition: background-color 200ms linear
 
   &:first-child
     border-right: unset

@@ -13,10 +13,15 @@ const Header: FC = () => {
       <h1>Dapp fines</h1>
 
       {authed && (
-        <>
-          <Link href={'/'}>List of fines</Link>
-          <Link href={'/create-fine'}>Create Fine</Link>
-        </>
+        <div className={styles.linksWrapper}>
+          <Link className={styles.link} href={'/'}>
+            List of fines
+          </Link>
+
+          <Link className={styles.link} href={'/create-fine'}>
+            Create Fine
+          </Link>
+        </div>
       )}
     </header>
   )
