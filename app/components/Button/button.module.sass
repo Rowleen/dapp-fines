@@ -14,13 +14,14 @@
     background-color: $font-color-primary
 
 .pill
+  cursor: pointer
   color: $font-color-primary
   border: solid 1px $border-color-primary
-  background-color: $bg-color-base
+  background-color: $bg-color-secondary
   padding: $spacing-lg $spacing-2xl $spacing-lg $spacing-3xl
 
   &:hover, &:active
-    background-color: $bg-color-active
+    background-color: $bg-color-third
 
   &:first-child
     border-right: unset
@@ -33,6 +34,7 @@
     border-bottom-right-radius: $radius-rounded
 
 .link
+  cursor: pointer
   color: $font-color-primary
   border: unset
   text-decoration: underline

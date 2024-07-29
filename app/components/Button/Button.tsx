@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import styles from './button.module.sass'
 
 interface ButtonProps {
-  color?: 'primary'
+  color?: 'primary' | 'danger'
   text: string
   onClick?: (event: React.MouseEvent) => void
   shape: 'pill' | 'button' | 'link'
@@ -27,7 +27,8 @@ const Button: FC<ButtonProps> = ({
     [styles.button]: shape === 'button',
     [styles.pill]: shape === 'pill',
     [styles.link]: shape === 'link',
-    [styles.primary]: color === 'primary'
+    [styles.primary]: color === 'primary',
+    [styles.linkDanger]: color === 'danger'
   })
 
   return (
