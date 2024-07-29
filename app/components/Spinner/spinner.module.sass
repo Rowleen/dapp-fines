@@ -1,0 +1,16 @@
+@import '../../sass/variables'
+
+.spinner
+  width: 80px
+  height: 80px
+  border: solid 5px rgba($bg-color-disabled, .5)
+  border-radius: 50%
+  border-left-color: $bg-color-dark
+  animation: spin 1s ease infinite
+
+@keyframes spin
+  0%
+    transform: rotate(0deg)
+
+  100%
+    transform: rotate(360deg)
