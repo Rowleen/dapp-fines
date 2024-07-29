@@ -33,7 +33,7 @@ const Login: FC = () => {
     if (selectedUser) {
       window.sessionStorage.setItem('authed', JSON.stringify(true))
       window.sessionStorage.setItem('userId', JSON.stringify(selectedUser.id))
-      router.push('/')
+      window.location.href = '/'
     } else {
       setToggleError(true)
     }
