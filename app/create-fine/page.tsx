@@ -5,11 +5,11 @@ import useCreateFine from '../core/domain/useCases/useCreateFine'
 import useAppContext from '../context/context'
 import useUserContext from '../context/user'
 import type { User } from '../core/domain/entities/User'
+import type { FineStatus } from '../core/domain/entities/Fine'
 
 import Button from '../components/Button/Button'
 
 import styles from './createFine.module.sass'
-import { FineStatus } from '../core/domain/entities/Fine'
 
 type Inputs = {
   sender: number
@@ -96,7 +96,7 @@ const CreateFine: FC = () => {
           ))}
         </select>
         {errors.recipent && (
-          <span className={styles.error}>This field is required</span>
+          <span className={styles.error}>This field is required.</span>
         )}
       </div>
 
@@ -123,7 +123,7 @@ const CreateFine: FC = () => {
         </select>
 
         {errors.recipent && (
-          <span className={styles.error}>This field is required</span>
+          <span className={styles.error}>This field is required.</span>
         )}
       </div>
 
@@ -135,7 +135,7 @@ const CreateFine: FC = () => {
         <input
           className={styles.input}
           {...register('ammountTokens', {
-            required: `This field is required and must be between 1 and ${sender.tokens}`,
+            required: true,
             min: 1,
             max: sender.tokens
           })}
@@ -144,7 +144,10 @@ const CreateFine: FC = () => {
         />
 
         {errors.ammountTokens && (
-          <span className={styles.error}>This field is required</span>
+          <span className={styles.error}>
+            This field is required and can&apos;t exced the maximun of tokens (
+            {sender.tokens}) for {sender.nickname}.
+          </span>
         )}
       </div>
       <Button
