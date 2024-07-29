@@ -18,13 +18,14 @@ interface StateAppInterface {
 }
 
 interface ContextAppInterface extends StateAppInterface {
-  setData: Dispatch<SetStateAction<StateAppInterface>>
+  setData: ({}) => void
 }
 
 export const AppContext = createContext({
   users: [],
-  fines: []
-} as StateAppInterface)
+  fines: [],
+  setData: () => {}
+} as ContextAppInterface)
 
 export const AppContextProvider = ({ children }: { children: JSX.Element }) => {
   const [data, setData] = useState<StateAppInterface>({
