@@ -1,0 +1,30 @@
+@import '../../sass/variables'
+
+.fine
+  width: 100%
+  display: grid
+  grid-template-columns: repeat(4, 1fr)
+  background-color: $bg-color-secondary
+  padding: $spacing-lg $spacing-md
+  margin-bottom: $spacing-md
+  border-radius: $radius-md
+
+  .column
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+
+    &:last-child
+      flex-direction: row
+
+      button
+        margin-right: $spacing-xs
+
+        &:last-child
+          margin-right: unset
+          margin-left: $spacing-xs
+
+    .tokenText
+      margin-bottom: $spacing-xs
+      color: $font-color-disabled
