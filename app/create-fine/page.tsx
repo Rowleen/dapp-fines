@@ -1,24 +1,28 @@
 'use client'
 import { FC, useEffect, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import useCreateFine from '../core/domain/useCases/useCreateFine'
 import useAppContext from '../context/context'
 import type { User } from '../core/domain/entities/User'
 
 import Button from '../components/Button/Button'
 
 import styles from './createFine.module.sass'
+import { FineStatus } from '../core/domain/entities/Fine'
 
 type Inputs = {
-  senderId: number
-  recipentId: number
+  sender: number
+  recipent: number
   ammountTokens: number
 }
 
 const CreateFine: FC = () => {
+  const { mutate } = useCreateFine()
+
   const data = useAppContext()
   const [sender, setSender] = useState<User>({
     id: 0,
-    nickname: 'Doe',
+    nickname: 'Select a user',
     tokens: 0
   })
 
@@ -46,7 +50,20 @@ const CreateFine: FC = () => {
     formState: { errors, isSubmitting }
   } = useForm<Inputs>()
 
-  const onSubmit: SubmitHandler<Inputs> = data => console.log(data)
+  const onSubmit: SubmitHandler<Inputs> = fine => {
+    const completeData = {
+      // Cast to number sender and recipent to update correctly the context.
+      sender: Number(fine.sender),
+      recipent: Number(fine.recipent),
+      ammountTokens: Number(fine.ammountTokens),
+      // Fake this prop until login it's created.
+      initiatorId: 0,
+      // Complete this prop. It would be the backend which orchestrate this things.
+      id: data.fines[data.fines.length - 1].id + 1,
+      status: 'pending' as FineStatus
+    }
+    mutate(completeData)
+  }
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -57,12 +74,11 @@ const CreateFine: FC = () => {
 
         <select
           className={styles.input}
-          {...register('senderId', { required: true })}
+          {...register('sender', { required: true })}
           onChange={selectSender}
+          defaultValue='Select a user'
         >
-          <option value='' disabled selected>
-            Select a user
-          </option>
+          <option disabled>Select a user</option>
           {data.users.map((user, index) => (
             <option
               key={user.id + index}
@@ -73,8 +89,7 @@ const CreateFine: FC = () => {
             </option>
           ))}
         </select>
-
-        {errors.recipentId && (
+        {errors.recipent && (
           <span className={styles.error}>This field is required</span>
         )}
       </div>
@@ -86,9 +101,9 @@ const CreateFine: FC = () => {
 
         <select
           className={styles.input}
-          {...register('recipentId', { required: true })}
+          {...register('recipent', { required: true })}
         >
-          <option value='' disabled selected>
+          <option value='' disabled>
             Select a user
           </option>
           {recipents.map((user, index) => (
@@ -98,7 +113,7 @@ const CreateFine: FC = () => {
           ))}
         </select>
 
-        {errors.recipentId && (
+        {errors.recipent && (
           <span className={styles.error}>This field is required</span>
         )}
       </div>
@@ -123,7 +138,13 @@ const CreateFine: FC = () => {
           <span className={styles.error}>This field is required</span>
         )}
       </div>
-      <Button type='submit' text='Send' shape='button' color='primary' />
+      <Button
+        type='submit'
+        text='Send'
+        shape='button'
+        color='primary'
+        disabled={isSubmitting}
+      />
     </form>
   )
 }
