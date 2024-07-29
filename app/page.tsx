@@ -1,5 +1,5 @@
 'use client'
-import { Header } from './components'
+import { Header, FinesList } from './components'
 
 import styles from './sass/home.module.sass'
 
@@ -12,8 +12,10 @@ const Home = () => {
         <section className={styles.titleWrapper}>
           <h1 className={styles.title}>The place to fine others</h1>
 
-          <h2 className={styles.subtitle}>Let&apos;s live new adventures</h2>
+          <h2 className={styles.subtitle}>Let&apos;s do new friends</h2>
         </section>
+
+        <FinesList />
       </div>
     </div>
   )
