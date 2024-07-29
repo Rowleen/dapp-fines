@@ -2,7 +2,7 @@ import { FC } from 'react'
 import useAppContext from '../../context/context'
 import Fine from '../Fine/Fine'
 
-import styles from './FinesList.module.sass'
+import styles from './finesList.module.sass'
 
 const FinesList: FC = () => {
   const data = useAppContext()
