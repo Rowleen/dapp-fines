@@ -1,22 +1,33 @@
 'use client'
-import { useContext, createContext, useState, useEffect, Context } from 'react'
+import {
+  useContext,
+  createContext,
+  useState,
+  useEffect,
+  Dispatch,
+  SetStateAction
+} from 'react'
 import { User } from '../core/domain/entities/User'
 import { Fine } from '../core/domain/entities/Fine'
 import useGetUsers from '../core/domain/useCases/useGetUsers'
 import useGetFines from '../core/domain/useCases/useGetFines'
 
-interface ContextAppInterface {
+interface StateAppInterface {
   users: User[]
   fines: Fine[]
+}
+
+interface ContextAppInterface extends StateAppInterface {
+  setData: Dispatch<SetStateAction<StateAppInterface>>
 }
 
 export const AppContext = createContext({
   users: [],
   fines: []
-} as ContextAppInterface)
+} as StateAppInterface)
 
 export const AppContextProvider = ({ children }: { children: JSX.Element }) => {
-  const [context, setContext] = useState<ContextAppInterface>({
+  const [data, setData] = useState<StateAppInterface>({
     users: [],
     fines: []
   })
@@ -26,15 +37,19 @@ export const AppContextProvider = ({ children }: { children: JSX.Element }) => {
 
   useEffect(() => {
     if (users && fines) {
-      setContext({
-        ...context,
+      setData({
+        ...data,
         users,
         fines
       })
     }
   }, [users, fines])
 
-  return <AppContext.Provider value={context}>{children}</AppContext.Provider>
+  return (
+    <AppContext.Provider value={{ ...data, setData } as ContextAppInterface}>
+      {children}
+    </AppContext.Provider>
+  )
 }
 
 export const useAppContext = () => {
