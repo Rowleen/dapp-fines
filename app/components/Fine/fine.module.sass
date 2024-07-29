@@ -5,9 +5,9 @@
   display: grid
   grid-template-columns: repeat(4, 1fr)
   background-color: $bg-color-secondary
+  border-radius: $radius-md
   padding: $spacing-lg $spacing-md
   margin-bottom: $spacing-md
-  border-radius: $radius-md
 
   .column
     display: flex
@@ -19,11 +19,20 @@
       flex-direction: row
 
       button
-        margin-right: $spacing-xs
+        margin-right: $spacing-sm
 
         &:last-child
           margin-right: unset
-          margin-left: $spacing-xs
+          margin-left: $spacing-sm
+
+    .statusSuccess, .statusDanger
+      text-transform: capitalize
+
+    .statusSuccess
+      color: $font-color-success
+
+    .statusDanger
+      color: $font-color-danger
 
     .tokenText
       margin-bottom: $spacing-xs

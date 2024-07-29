@@ -1,10 +1,14 @@
-import { FC } from 'react'
-import Image from 'next/image'
+import React, { FC, useCallback } from 'react'
 import useAppContext from '../../context/context'
-import { Fine as FineType } from '../../core/domain/entities/Fine'
+import Image from 'next/image'
+import classNames from 'classnames'
 import Button from '../Button/Button'
+import Avatar from '../Avatar/Avatar'
+
+import type { Fine as FineType } from '../../core/domain/entities/Fine'
 
 import styles from './fine.module.sass'
+import useUpdateStatusFine from '../../core/domain/useCases/useUpdateFine'
 
 interface FineProps {
   fine: FineType
@@ -13,16 +17,23 @@ interface FineProps {
 const Fine: FC<FineProps> = ({ fine }) => {
   const data = useAppContext()
 
-  const suggester =
-    data && data.users.find(user => Number(user.id) === fine.initiatorId)
+  const { mutate } = useUpdateStatusFine()
+
   const sender =
     data && data.users.find(user => Number(user.id) === fine.sender)
   const recipent =
     data && data.users.find(user => Number(user.id) === fine.recipent)
 
+  const status = classNames({
+    [styles.statusSuccess]: fine.status === 'approved',
+    [styles.statusDanger]: fine.status === 'rejected'
+  })
+
   return (
     <article className={styles.fine}>
-      <div className={styles.column}>{sender?.nickname}</div>
+      <div className={styles.column}>
+        <Avatar name={sender?.nickname || 'Doe'} />
+      </div>
 
       <div className={styles.column}>
         <small>Sends</small>
@@ -35,12 +46,34 @@ const Fine: FC<FineProps> = ({ fine }) => {
         />
       </div>
 
-      <div className={styles.column}>{recipent?.nickname}</div>
-
       <div className={styles.column}>
-        <Button type='button' shape='link' text='Approve' /> |
-        <Button type='button' shape='link' color='danger' text='Reject' />
+        <Avatar name={recipent?.nickname || 'Doe'} />
       </div>
+
+      {fine.status === 'pending' ? (
+        <div className={styles.column}>
+          <Button
+            type='button'
+            shape='link'
+            text='Approve'
+            value='approved'
+            onClick={() => mutate({ fine, status: 'approved' })}
+          />
+          |
+          <Button
+            type='button'
+            shape='link'
+            color='danger'
+            text='Reject'
+            value='rejected'
+            onClick={() => mutate({ fine, status: 'rejected' })}
+          />
+        </div>
+      ) : (
+        <div className={styles.column}>
+          <span className={status}>{fine.status}</span>
+        </div>
+      )}
     </article>
   )
 }
