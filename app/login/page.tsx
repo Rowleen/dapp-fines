@@ -1,6 +1,5 @@
 'use client'
 import React, { FC, useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import useAppContext from '../context/context'
 
@@ -15,7 +14,6 @@ type Inputs = {
 
 const Login: FC = () => {
   const context = useAppContext()
-  const router = useRouter()
 
   const [toggleError, setToggleError] = useState<boolean>(false)
 
