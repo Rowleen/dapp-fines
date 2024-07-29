@@ -1,5 +1,5 @@
 export type User = {
-  readonly id: string
+  readonly id: number
   nickname: string
-  tockens: number
+  tokens: number
 }
