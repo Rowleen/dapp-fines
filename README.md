@@ -24,7 +24,7 @@ https://my-json-server.typicode.com/Rowleen/dapp
 
 In the moment of trigger user actions like update (approve or reject) a fine or create one, you would see the calls to the endpoints in the network tab in your DevTools of your browser.
 
-## How login
+## How to login
 The app haven't a validation of login, so you can login with any user known in the app with a random password. Any password will works.
 
 The only validation in the login is that you have to use one of these user names:
