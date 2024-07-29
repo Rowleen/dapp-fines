@@ -52,7 +52,9 @@ const Login: FC = () => {
         />
 
         {toggleError && (
-          <span className={styles.error}>This username doesn't exists</span>
+          <span className={styles.error}>
+            This username doesn&apos;t exists
+          </span>
         )}
         {errors.username && (
           <span className={styles.error}>This field is required</span>

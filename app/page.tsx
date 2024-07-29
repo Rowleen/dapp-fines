@@ -1,9 +1,9 @@
 'use client'
 import { FinesList } from './components'
+import useUserContext from './context/user'
 
 const Home = () => {
-  const authed =
-    typeof window !== 'undefined' && window.sessionStorage.getItem('authed')
+  const { authed } = useUserContext()
 
   return authed && <FinesList />
 }

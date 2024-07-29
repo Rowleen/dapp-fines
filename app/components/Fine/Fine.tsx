@@ -1,5 +1,6 @@
-import React, { FC, useCallback } from 'react'
+import React, { FC } from 'react'
 import useAppContext from '../../context/context'
+import useUserContext from '../../context/user'
 import Image from 'next/image'
 import classNames from 'classnames'
 import Button from '../Button/Button'
@@ -16,7 +17,7 @@ interface FineProps {
 
 const Fine: FC<FineProps> = ({ fine }) => {
   const data = useAppContext()
-  const userId = Number(window.sessionStorage.getItem('userId'))
+  const { userId } = useUserContext()
 
   const { mutate } = useUpdateStatusFine()
 

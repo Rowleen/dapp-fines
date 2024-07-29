@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/navigation'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AppContextProvider } from './context/context'
+import { UserContextProvider } from './context/user'
 import { ToastContainer } from 'react-toastify'
 import { Header } from './components'
 
@@ -29,35 +30,39 @@ export default function RootLayout({
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AppContextProvider>
-        <html lang='en'>
-          <Head>
-            <meta charSet='utf-8' />
-            <meta httpEquiv='X-UA-Compatible' content='IE=edge' />
-            <title>DAPP - Penalty APP</title>
-            <meta
-              name='viewport'
-              content='width=device-width, initial-scale=1'
-            />
-          </Head>
-          <body>
-            <div className={styles.wrapper}>
-              <div className={styles.home}>
-                <Header />
+      <UserContextProvider>
+        <AppContextProvider>
+          <html lang='en'>
+            <Head>
+              <meta charSet='utf-8' />
+              <meta httpEquiv='X-UA-Compatible' content='IE=edge' />
+              <title>DAPP - Penalty APP</title>
+              <meta
+                name='viewport'
+                content='width=device-width, initial-scale=1'
+              />
+            </Head>
+            <body>
+              <div className={styles.wrapper}>
+                <div className={styles.home}>
+                  <Header />
 
-                <section className={styles.titleWrapper}>
-                  <h1 className={styles.title}>The place to fine others</h1>
+                  <section className={styles.titleWrapper}>
+                    <h1 className={styles.title}>The place to fine others</h1>
 
-                  <h2 className={styles.subtitle}>Let&apos;s do new friends</h2>
-                </section>
+                    <h2 className={styles.subtitle}>
+                      Let&apos;s do new friends
+                    </h2>
+                  </section>
 
-                {children}
+                  {children}
+                </div>
               </div>
-            </div>
-            <ToastContainer />
-          </body>
-        </html>
-      </AppContextProvider>
+              <ToastContainer />
+            </body>
+          </html>
+        </AppContextProvider>
+      </UserContextProvider>
     </QueryClientProvider>
   )
 }

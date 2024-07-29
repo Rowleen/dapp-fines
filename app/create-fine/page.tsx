@@ -3,6 +3,7 @@ import { FC, useEffect, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import useCreateFine from '../core/domain/useCases/useCreateFine'
 import useAppContext from '../context/context'
+import useUserContext from '../context/user'
 import type { User } from '../core/domain/entities/User'
 
 import Button from '../components/Button/Button'
@@ -18,7 +19,7 @@ type Inputs = {
 
 const CreateFine: FC = () => {
   const { mutate } = useCreateFine()
-  const userId = Number(window.sessionStorage.getItem('userId'))
+  const { userId } = useUserContext()
 
   const data = useAppContext()
   const [sender, setSender] = useState<User>({
@@ -34,7 +35,7 @@ const CreateFine: FC = () => {
       const recipents = data.users.filter(user => sender.id !== user.id)
       setRecipents(recipents)
     }
-  }, [sender])
+  }, [sender, data.users])
 
   const selectSender = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = e.target
@@ -54,7 +55,7 @@ const CreateFine: FC = () => {
 
   useEffect(() => {
     reset()
-  }, [isSubmitSuccessful])
+  }, [isSubmitSuccessful, reset])
 
   const onSubmit: SubmitHandler<Inputs> = fine => {
     const completeData = {

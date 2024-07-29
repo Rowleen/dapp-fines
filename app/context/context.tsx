@@ -1,12 +1,5 @@
 'use client'
-import {
-  useContext,
-  createContext,
-  useState,
-  useEffect,
-  Dispatch,
-  SetStateAction
-} from 'react'
+import { useContext, createContext, useState, useEffect } from 'react'
 import { User } from '../core/domain/entities/User'
 import { Fine } from '../core/domain/entities/Fine'
 import useGetUsers from '../core/domain/useCases/useGetUsers'
@@ -18,7 +11,7 @@ interface StateAppInterface {
 }
 
 interface ContextAppInterface extends StateAppInterface {
-  setData: ({}) => void
+  setData: () => void
 }
 
 export const AppContext = createContext({
@@ -39,7 +32,6 @@ export const AppContextProvider = ({ children }: { children: JSX.Element }) => {
   useEffect(() => {
     if (users && fines) {
       setData({
-        ...data,
         users,
         fines
       })

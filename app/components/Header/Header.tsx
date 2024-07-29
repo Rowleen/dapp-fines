@@ -1,12 +1,12 @@
 'use client'
 import { FC } from 'react'
 import Link from 'next/link'
+import useUserContext from '../../context/user'
 
 import styles from './header.module.sass'
 
 const Header: FC = () => {
-  const authed =
-    typeof window !== 'undefined' && window.sessionStorage.getItem('authed')
+  const { authed } = useUserContext()
 
   return (
     <header className={styles.header}>
