@@ -61,9 +61,11 @@ const FinesList: FC = () => {
           </section>
 
           {filteredFines.length
-            ? filteredFines.map((fine, index) => (
-                <Fine key={fine.initiatorId + index} fine={fine} />
-              ))
+            ? filteredFines
+                .toReversed()
+                .map((fine, index) => (
+                  <Fine key={fine.initiatorId + index} fine={fine} />
+                ))
             : "Ops! the're no fines to show you 😓"}
         </>
       ) : (
